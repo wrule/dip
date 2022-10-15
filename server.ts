@@ -4,8 +4,12 @@ import Router from 'koa-router';
 const app = new Koa();
 const router = new Router();
 
-router.post('/ip', (ctx, next) => {
+router.post('/ip', (ctx) => {
   ctx.body = 'fine';
+});
+
+router.get('/ip', (ctx) => {
+  ctx.body = 'some ip';
 });
 
 app
