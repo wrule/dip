@@ -1,0 +1,8 @@
+{
+  "name": "dip",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/wrule/dip.git",
+  "license": "MIT",
+  "private": false
+}
