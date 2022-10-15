@@ -2,6 +2,12 @@
   "name": "dip",
   "version": "0.1.0",
   "main": "index.js",
+  "scripts": {
+    "serve": "node serve.js",
+    "client": "node client.js",
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
   "repository": "https://github.com/wrule/dip.git",
   "license": "MIT",
   "private": false
