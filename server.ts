@@ -16,7 +16,6 @@ let ip = '未上报';
 let update_time = '';
 
 router.post('/ip', (ctx) => {
-  console.log(`${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} >> 上报`);
   const new_ip = /(\d+.){3}\d+/.exec(ctx.ip)?.[0] || 'IP解析错误';
   update_time = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
   if (new_ip !== ip) {
@@ -24,9 +23,13 @@ router.post('/ip', (ctx) => {
     ding.SendMessage(`[${update_time}] IP变更为: ${ip}`);
   }
   ctx.body = ip;
+  console.log(`${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} >> 上报`);
 });
 
-router.get('/ip', (ctx) => ctx.body = `${ip} ${update_time}`.trim());
+router.get('/ip', (ctx) => {
+  ctx.body = `${ip} ${update_time}`.trim();
+  console.log(`${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} >> 查询`);
+});
 
 app
   .use(router.routes())
