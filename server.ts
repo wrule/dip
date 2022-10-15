@@ -12,7 +12,7 @@ router.post('/ip', (ctx) => {
   try {
     fs.writeFileSync(
       file_name,
-      moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      `${ctx.ip} ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}`,
       'utf-8',
     );
   } catch (e) {
