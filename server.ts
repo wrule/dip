@@ -23,13 +23,13 @@ router.post('/ip', (ctx) => {
 });
 
 router.get('/ip', (ctx) => {
+  let result = '暂无上报';
   try {
-    ctx.body = fs.readFileSync(file_name, 'utf-8');
+    result = fs.readFileSync(file_name, 'utf-8');
   } catch (e) {
     console.error(e);
-  } finally {
-    ctx.body = '暂无上报';
   }
+  ctx.body = result;
 });
 
 app
