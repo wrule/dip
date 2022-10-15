@@ -1,36 +1,31 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import moment from 'moment';
-import fs from 'fs';
+import { DingTalk } from './dingtalk';
+const json_data = require('./config.json');
 
 const app = new Koa();
 const router = new Router();
+const ding = new DingTalk({
+  access_token: json_data.ACCESS_TOKEN,
+  secret: json_data.SECRET,
+  at_mobiles: json_data.AT_MOBILES,
+});
 
-const file_name = 'ip.txt';
+let ip = '未上报';
+let update_time = '';
 
 router.post('/ip', (ctx) => {
-  try {
-    fs.writeFileSync(
-      file_name,
-      `${/(\d+.){3}\d+/.exec(ctx.ip)?.[0] || 'IP错误'} ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}`,
-      'utf-8',
-    );
-  } catch (e) {
-    console.log(e);
-  } finally {
-    ctx.body = '好的';
+  const new_ip = /(\d+.){3}\d+/.exec(ctx.ip)?.[0] || 'IP解析错误';
+  update_time = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+  if (new_ip !== ip) {
+    ip = new_ip;
+    ding.SendMessage(`[${update_time}] IP变更为: ${ip}`);
   }
+  ctx.body = ip;
 });
 
-router.get('/ip', (ctx) => {
-  let result = '暂无上报';
-  try {
-    result = fs.readFileSync(file_name, 'utf-8');
-  } catch (e) {
-    console.log(e);
-  }
-  ctx.body = result;
-});
+router.get('/ip', (ctx) => ctx.body = `${ip} ${update_time}`.trim());
 
 app
   .use(router.routes())
