@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-const json_data = require('./url.json');
+const json_data = require('./config.json');
 
 let timer: any = null;
 

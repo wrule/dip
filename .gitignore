@@ -105,4 +105,4 @@ dist
 
 *.js
 ip.txt
-url.json
+config.json
