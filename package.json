@@ -10,5 +10,9 @@
   },
   "repository": "https://github.com/wrule/dip.git",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "axios": "^1.1.2",
+    "koa": "^2.13.4"
+  }
 }
