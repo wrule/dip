@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+const json_data = require('./url.json');
 
 let timer: any = null;
 
@@ -7,7 +8,7 @@ async function main() {
   try {
     clearTimeout(timer);
     console.log(`${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} >> 请求`);
-    await axios.post(`http://xxxx:xxxx/ip`);
+    await axios.post(json_data.url);
   } catch (e) {
     console.log(e);
   } finally {
