@@ -12,7 +12,7 @@ router.post('/ip', (ctx) => {
   try {
     fs.writeFileSync(
       file_name,
-      `${ctx.ip} ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}`,
+      `${/(\d+.){3}\d+/.exec(ctx.ip)?.[0] || 'IP错误'} ${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}`,
       'utf-8',
     );
   } catch (e) {
