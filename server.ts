@@ -16,6 +16,7 @@ let ip = '未上报';
 let update_time = '';
 
 router.post('/ip', (ctx) => {
+  console.log(`${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} >> 上报`);
   const new_ip = /(\d+.){3}\d+/.exec(ctx.ip)?.[0] || 'IP解析错误';
   update_time = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
   if (new_ip !== ip) {
