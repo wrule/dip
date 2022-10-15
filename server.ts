@@ -16,7 +16,7 @@ router.post('/ip', (ctx) => {
       'utf-8',
     );
   } catch (e) {
-    console.error(e);
+    console.log(e);
   } finally {
     ctx.body = '好的';
   }
@@ -27,7 +27,7 @@ router.get('/ip', (ctx) => {
   try {
     result = fs.readFileSync(file_name, 'utf-8');
   } catch (e) {
-    console.error(e);
+    console.log(e);
   }
   ctx.body = result;
 });
